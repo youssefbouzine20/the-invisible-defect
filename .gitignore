@@ -1,0 +1,14 @@
+# Local data and experiment outputs
+/data/
+/outputs/
+/checkpoints/
+/STUDY_TRACKER.txt
+
+# Python and Jupyter
+/.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# Local secrets
+.env
+.env.*
