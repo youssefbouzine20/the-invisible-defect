@@ -25,7 +25,7 @@ Select `.venv` in VS Code. Keep the dataset, generated outputs, and environment 
 
 ## Use the shared data
 
-Use `splits/bottle.json` to start with 167 training and 42 validation images. The other 14 splits will be saved when Youssef runs the [preparation notebook](notebooks/data_preparation.ipynb). Fit each model or memory bank on its category's training split and fix the settings before scoring the official test images.
+Use `splits/bottle.json` to start with 167 training and 42 validation images. The [preparation notebook](notebooks/data_preparation.ipynb) saves one split file per category. Fit each model or memory bank on its category's training split and fix the settings before scoring the official test images.
 
 ```python
 from pathlib import Path

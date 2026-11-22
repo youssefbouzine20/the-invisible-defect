@@ -4,7 +4,7 @@ All 15 categories passed the integrity audit. The category notebooks show the in
 
 ## Next step
 
-Bottle is ready with **167 training**, **42 validation**, and **83 official test** images. To prepare the other 14 categories, open the preparation notebook in VS Code, select `.venv`, and click **Run All**. Check the final counts and look for 15 files in `splits/`. [Bottle split](../splits/bottle.json) · [Preparation notebook](../notebooks/data_preparation.ipynb)
+The saved preparation run produced all 15 split files in `splits/`. The totals are **2,903 training**, **726 validation**, and **1,725 official test** images. Bottle has **167 training**, **42 validation**, and **83 official test** images. [Bottle split](../splits/bottle.json) · [Preparation notebook](../notebooks/data_preparation.ipynb)
 
 The shared code uses seed `42` to set aside about 20% of each category's normal training images for validation. Each category keeps its official test set. [Preparation code](../data_tools/preparation.py)
 
