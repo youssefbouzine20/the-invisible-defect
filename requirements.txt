@@ -1,0 +1,6 @@
+# Packages for data exploration and preparation
+ipykernel==7.1.0
+matplotlib==3.10.7
+numpy==2.3.3
+pandas==2.3.3
+Pillow==12.3.0

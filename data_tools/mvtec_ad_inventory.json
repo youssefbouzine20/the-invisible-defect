@@ -1,0 +1,106 @@
+{
+  "source": "https://doi.org/10.1007/s11263-020-01400-4",
+  "source_tables": [1, 8],
+  "categories": {
+    "bottle": {
+      "train_good": 209,
+      "test_good": 20,
+      "defects": {"broken_large": 20, "broken_small": 22, "contamination": 21}
+    },
+    "cable": {
+      "train_good": 224,
+      "test_good": 58,
+      "defects": {
+        "bent_wire": 13,
+        "cable_swap": 12,
+        "combined": 11,
+        "cut_inner_insulation": 14,
+        "cut_outer_insulation": 10,
+        "missing_cable": 12,
+        "missing_wire": 10,
+        "poke_insulation": 10
+      }
+    },
+    "capsule": {
+      "train_good": 219,
+      "test_good": 23,
+      "defects": {"crack": 23, "faulty_imprint": 22, "poke": 21, "scratch": 23, "squeeze": 20}
+    },
+    "carpet": {
+      "train_good": 280,
+      "test_good": 28,
+      "defects": {"color": 19, "cut": 17, "hole": 17, "metal_contamination": 17, "thread": 19}
+    },
+    "grid": {
+      "train_good": 264,
+      "test_good": 21,
+      "defects": {"bent": 12, "broken": 12, "glue": 11, "metal_contamination": 11, "thread": 11}
+    },
+    "hazelnut": {
+      "train_good": 391,
+      "test_good": 40,
+      "defects": {"crack": 18, "cut": 17, "hole": 18, "print": 17}
+    },
+    "leather": {
+      "train_good": 245,
+      "test_good": 32,
+      "defects": {"color": 19, "cut": 19, "fold": 17, "glue": 19, "poke": 18}
+    },
+    "metal_nut": {
+      "train_good": 220,
+      "test_good": 22,
+      "defects": {"bent": 25, "color": 22, "flip": 23, "scratch": 23}
+    },
+    "pill": {
+      "train_good": 267,
+      "test_good": 26,
+      "defects": {
+        "color": 25,
+        "combined": 17,
+        "contamination": 21,
+        "crack": 26,
+        "faulty_imprint": 19,
+        "pill_type": 9,
+        "scratch": 24
+      }
+    },
+    "screw": {
+      "train_good": 320,
+      "test_good": 41,
+      "defects": {"manipulated_front": 24, "scratch_head": 24, "scratch_neck": 25, "thread_side": 23, "thread_top": 23}
+    },
+    "tile": {
+      "train_good": 230,
+      "test_good": 33,
+      "defects": {"crack": 17, "glue_strip": 18, "gray_stroke": 16, "oil": 18, "rough": 15}
+    },
+    "toothbrush": {
+      "train_good": 60,
+      "test_good": 12,
+      "defects": {"defective": 30}
+    },
+    "transistor": {
+      "train_good": 213,
+      "test_good": 60,
+      "defects": {"bent_lead": 10, "cut_lead": 10, "damaged_case": 10, "misplaced": 10}
+    },
+    "wood": {
+      "train_good": 247,
+      "test_good": 19,
+      "defects": {"color": 8, "combined": 11, "hole": 10, "liquid": 10, "scratch": 21}
+    },
+    "zipper": {
+      "train_good": 240,
+      "test_good": 32,
+      "defects": {
+        "broken_teeth": 19,
+        "combined": 16,
+        "fabric_border": 17,
+        "fabric_interior": 16,
+        "rough": 17,
+        "split_teeth": 18,
+        "squeezed_teeth": 16
+      }
+    }
+  }
+}

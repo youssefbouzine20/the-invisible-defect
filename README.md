@@ -1,15 +1,52 @@
 # The Invisible Defect: Beyond Reconstruction
 
-Can a model detect and localize defects on industrial products when it learns
-only from defect-free examples?
+We compare three ways to detect defects using normal training images. Start with bottle, then extend to the remaining categories as time and compute allow. [MVTec AD dataset](https://www.mvtec.com/research-teaching/datasets/mvtec-ad)
 
-This university project compares a convolutional autoencoder (CAE), a
-variational autoencoder (VAE), and PatchCore on the bottle category of
-[MVTec AD](https://www.mvtec.com/research-teaching/datasets/mvtec-ad).
+## Who does what
 
-We evaluate all three methods on the same official test split and compare
-image-level detection, defect localization, inference time, and memory use.
+| Person | Work folder and guide |
+| --- | --- |
+| Youssef | `data_tools/` and `notebooks/` for data preparation and analysis. [Data guide](docs/data_work.md) |
+| Omar | `models/cae/` for the convolutional autoencoder. [CAE guide](models/cae/README.md) |
+| Rime | `models/vae/` for the variational autoencoder. [VAE guide](models/vae/README.md) |
+| Houssam | `models/patchcore/` for PatchCore. [PatchCore guide](models/patchcore/README.md) |
 
-## Project status
+## Setup
 
-Dataset acquisition and validation are in progress.
+Extract MVTec AD under `data/raw/mvtec-ad/` so `bottle/train/`, `bottle/test/`, and `bottle/ground_truth/` are inside that folder. From the project root in Git Bash, set up Python 3.13.
+
+```bash
+python -m venv .venv
+source .venv/Scripts/activate
+python -m pip install -r requirements.txt
+```
+
+Select `.venv` in VS Code. Keep the dataset, generated outputs, and environment local.
+
+## Use the shared data
+
+Use `splits/bottle.json` to start with 167 training and 42 validation images. The other 14 splits will be saved when Youssef runs the [preparation notebook](notebooks/data_preparation.ipynb). Fit each model or memory bank on its category's training split and fix the settings before scoring the official test images.
+
+```python
+from pathlib import Path
+
+from data_tools.preparation import category_image_ids, prepare_image
+
+dataset_root = Path("data/raw/mvtec-ad")
+image_ids = category_image_ids(dataset_root, Path("splits/bottle.json"), "bottle", "train")
+image = prepare_image(dataset_root / image_ids[0])
+```
+
+Run this from the project root. `prepare_image` returns the full image as 224 × 224 RGB with three channels first and values from 0 to 1. Use `"validation"` or `"test"` for the other lists.
+
+## What to hand back
+
+Each teammate shares one folder under `outputs/<method>/<run-id>/` for the categories they completed.
+
+| File | What it contains |
+| --- | --- |
+| `predictions.csv` | One row per validation or official test image. Use `sample_id`, `split`, `anomaly_score`, and `map_path`. The ID is the path relative to the dataset root, including its category. The split is `validation` or `test`. |
+| Heatmap files | One 224 × 224 `float32` NumPy `.npy` file per row. Use category-specific paths relative to the run folder. Higher scores and values mean more unusual. |
+| `run.json` | Model name, Git commit, package versions, and device. For each completed category, record the split version, settings, seed, and model or memory-bank filename. |
+
+Return raw scores and heatmaps. Youssef will set thresholds and compare the methods once all three runs arrive. [Progress log](docs/project_progress.md) · [Evaluation plan](docs/experiment_protocol.md)
