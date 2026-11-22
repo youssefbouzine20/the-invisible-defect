@@ -19,7 +19,7 @@ The project compares CAE, VAE, and PatchCore on the original MVTec AD dataset. T
 | Individual category notebooks | [The category notebook folder](../notebooks/categories/) contains one audit for each of the 15 categories. Saved runs for bottle, cable, capsule, carpet, grid, and hazelnut all show `PASS`, matching mask counts, two figures each, and zero errors. The other nine notebooks are ready for visual review. The [shared analysis code](../data_tools/audit_analysis.py) supplies the tables and figures for the 14 additional categories. |
 | Bottle data prepared | The [bottle split](../splits/bottle.json) contains 167 training and 42 validation images. The official test set contains 83 images. The preparation preview resized `bottle/train/good/009.png` to 224 × 224. |
 | All categories prepared | The [preparation notebook](../notebooks/data_preparation.ipynb) saved all 15 split files. The run showed **2,903 training**, **726 validation**, and **1,725 official test** images. The training and validation lists are disjoint within each category. |
-| Team handoff | Shared scripts live in `data_tools/`. The CAE, VAE, and PatchCore folders each explain what data is ready, how to build and run the method, and which prediction files to return. [Shared splits](../splits/) · [Team guides](../README.md#who-does-what) |
+| Team handoff | Checked that all 15 split files cover their category's local normal training images with disjoint train and validation IDs. Each model folder explains what data is ready, what the owner builds, and what they return. The setup guide distinguishes shared data packages from each model owner's dependencies and explains how to reproduce the notebooks. [Shared splits](../splits/) · [Team guides](../README.md#who-does-what) · [Data guide](data_work.md) |
 
 ## Verified bottle results
 
@@ -65,6 +65,7 @@ python data_tools/audit.py --root data/raw/mvtec-ad --all
 - [x] Audit all 15 categories and verify the bottle inventory, mask overlays, and defect-size results.
 - [x] Verify the category notebooks for bottle, cable, capsule, carpet, grid, and hazelnut.
 - [x] Save the shared split files for all 15 categories and prepare the team guides.
+- [x] Review the handoff files and document setup from a fresh clone.
 - [ ] Share the team guides and start with the bottle model runs.
 - [ ] Collect the three frozen model run folders with predictions and heatmaps.
 - [ ] Build and verify the common evaluator, then prepare the comparison tables and figures for the report.

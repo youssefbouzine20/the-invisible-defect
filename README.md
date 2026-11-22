@@ -13,7 +13,14 @@ We compare three ways to detect defects using normal training images. Start with
 
 ## Setup
 
-Extract MVTec AD under `data/raw/mvtec-ad/` so `bottle/train/`, `bottle/test/`, and `bottle/ground_truth/` are inside that folder. From the project root in Git Bash, set up Python 3.13.
+Clone the repository in Git Bash and open the cloned folder in VS Code.
+
+```bash
+git clone https://github.com/youssefbouzine20/the-invisible-defect.git
+cd the-invisible-defect
+```
+
+Download the original MVTec AD dataset from the link above. Extract it under `data/raw/mvtec-ad/` so the full path from the project root to the bottle training images is `data/raw/mvtec-ad/bottle/train/good/`. Use `python --version` in Git Bash to confirm it points to Python 3.13 before creating the shared data environment.
 
 ```bash
 python -m venv .venv
@@ -21,11 +28,11 @@ source .venv/Scripts/activate
 python -m pip install -r requirements.txt
 ```
 
-Select `.venv` in VS Code. Keep the dataset, generated outputs, and environment local.
+Install the Python and Jupyter extensions in VS Code and select `.venv` as the notebook kernel. `requirements.txt` covers data exploration and preparation. Each model owner records their framework, package versions, and exact setup and run commands in their model folder. Keep the dataset, generated outputs, and environment local.
 
 ## Use the shared data
 
-Use `splits/bottle.json` to start with 167 training and 42 validation images. The [preparation notebook](notebooks/data_preparation.ipynb) saves one split file per category. Fit each model or memory bank on its category's training split and fix the settings before scoring the official test images.
+Start with `splits/bottle.json`, which lists 167 training and 42 validation images. All 15 split files are ready to use. Fit each model or memory bank on its category's training split and fix the settings before scoring the official test images. [Reproduce the audit and preparation notebooks](docs/data_work.md#reproduce-the-notebooks)
 
 ```python
 from pathlib import Path
@@ -37,11 +44,11 @@ image_ids = category_image_ids(dataset_root, Path("splits/bottle.json"), "bottle
 image = prepare_image(dataset_root / image_ids[0])
 ```
 
-Run this from the project root. `prepare_image` returns the full image as 224 × 224 RGB with three channels first and values from 0 to 1. Use `"validation"` or `"test"` for the other lists.
+Run this from the project root. `prepare_image` returns the full image as 224 × 224 RGB with three channels first and values from 0 to 1. Use `"validation"` or `"test"` for the other lists. When your training script is ready, run it as a module from the project root so it can import `data_tools`. For example, if Omar creates `models/cae/train.py`, run `python -m models.cae.train`.
 
 ## What to hand back
 
-Each teammate shares one folder under `outputs/<method>/<run-id>/` for the categories they completed.
+Put the implementation and run commands in your assigned model folder on your Git branch. If you have read-only access, open a pull request from your fork. Share one local run folder under `outputs/<method>/<run-id>/` for the categories you completed separately from the Git branch.
 
 | File | What it contains |
 | --- | --- |
@@ -49,4 +56,4 @@ Each teammate shares one folder under `outputs/<method>/<run-id>/` for the categ
 | Heatmap files | One 224 × 224 `float32` NumPy `.npy` file per row. Use category-specific paths relative to the run folder. Higher scores and values mean more unusual. |
 | `run.json` | Model name, Git commit, package versions, and device. For each completed category, record the split version, settings, seed, and model or memory-bank filename. |
 
-Return raw scores and heatmaps. Youssef will set thresholds and compare the methods once all three runs arrive. [Progress log](docs/project_progress.md) · [Evaluation plan](docs/experiment_protocol.md)
+Return finite raw scores and heatmaps. Give Youssef the exact checkpoint or memory bank named in `run.json` so he can measure inference time and memory. It can travel with the run folder or be shared separately. Youssef will set thresholds and compare the methods once all three runs arrive. [Progress log](docs/project_progress.md) · [Evaluation plan](docs/experiment_protocol.md)
